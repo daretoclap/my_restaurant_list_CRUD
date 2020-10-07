@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const port = 3000
 const exphbr = require('express-handlebars')
-// const restaurantList = require('./restaurant.json')
+const Restaurant = require('./models/restaurant')
 const mongoose = require('mongoose')
 
 // Set connection to database
@@ -20,29 +20,43 @@ db.once('open', () => { // 連線成功
 app.engine('handlebars', exphbr({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
-// Set routes
+// Set router for index page (list of restaurants)
 app.get('/', (req, res) => {
-  res.render('index', { restaurants: restaurantList.results })
+  Restaurant.find() // 取出 Restaurant model 裡的所有資料
+    .lean() // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
+    .then(restaurants => res.render('index', { restaurants })) // 將資料傳給 index 樣板
+    .catch(error => console.error(error)) // 錯誤處理
 })
 
+// Set router for viewing restaurant detail
 app.get('/restaurants/:restaurant_id', (req, res) => {
   console.log(req.params.restaurant_id)
-  const restaurant = restaurantList.results.find((restaurant) => restaurant.id.toString() === req.params.restaurant_id)
-  res.render('show', { restaurant: restaurant })
+  const id = req.params.restaurant_id
+  return Restaurant.findById(id)
+    .lean()
+    .then(restaurant => res.render('show', { restaurant }))
+    .catch(error => console.log(error))
 })
 
+// Set router for filter function
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword
-  const restaurants = restaurantList.results.filter((restaurant) => {
-    return restaurant.name.toLowerCase().includes(keyword.toLowerCase())
-  })
-  res.render('index', { restaurants: restaurants, keyword: keyword })
+  let filteredList = []
+  return Restaurant.find()
+    .lean()
+    .then(restaurants => {
+      filteredList = restaurants.filter((restaurant) => {
+        return restaurant.name.toLowerCase().includes(keyword.toLowerCase())
+      })
+    })
+    .then(() => res.render('index', { restaurants: filteredList, keyword: keyword }))
+    .catch(error => console.log(error))
 })
 
-//Get the server to listen
+// Get the server to listen
 app.listen(port, () => {
   console.log(`Express is listening on localhost:${port}`)
 })
 
-//Set the static files
+// Set the static files
 app.use(express.static('public'))
