@@ -68,14 +68,10 @@ app.get('/restaurants/:restaurant_id/edit', (req, res) => {
 
 // Set router for edit-save 
 app.post('/restaurants/:restaurant_id/edit', (req, res) => {
-  console.log(req.params.restaurant_id)
   const id = req.params.restaurant_id
-  console.log(req.body)
-  const category = req.body.category
-  console.log(category)
   return Restaurant.findById(id)
     .then(restaurant => {
-      restaurant.category = category
+      restaurant = Object.assign(restaurant, req.body) // replace the entire set of data
       return restaurant.save()
     })
     .then(restaurant => res.redirect(`/restaurants/${id}`))

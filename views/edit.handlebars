@@ -4,49 +4,87 @@
   <div class="row">
     <div class="col-12 col-md-10 mx-auto">
 
-      <div class="text-right">
-        <a href="/restaurants/{{restaurant._id}}">Cancel</a>
+      <div class="text-center">
         <form action="/restaurants/{{restaurant._id}}/edit" method="POST" id="form-edit" style="display: inline;">
-          <button type="submit">Save</button>
+          <button type="submit" class="btn btn-light">Save Changes</button>
         </form>
+        <a href="/restaurants/{{restaurant._id}}" class="btn btn-light">Cancel</a>
         <form action="/restaurants/{{restaurant._id}}/delete" method="POST" style="display: inline;">
-          <button type="submit">Delete</button>
+          <button type="submit" class="btn btn-light">Delete</button>
         </form>
       </div>
-
+      <br>
+      <p class="mb-1">
+        <span class="text-secondary">
+          <i class="fas fa-store pr-2"></i>
+          餐廳名稱：
+        </span>
+        <input type="text" class="form-control" id="name" name="name" form="form-edit" value="{{restaurant.name}}">
+      </p>
+      <br>
       <p class="mb-1">
         <span class="text-secondary">
           <i class="fas fa-utensils pr-2"></i>
           類別：
         </span>
-        <input type="text" id="category" name="category" form="form-edit" value="{{restaurant.category}}">
+        <input type="text" class="form-control" id="category" name="category" form="form-edit"
+          value="{{restaurant.category}}">
       </p>
-
+      <br>
       <p class="mb-1">
         <span class="text-secondary">
           <i class="fas fa-map-marker-alt pr-2"></i>
           地址：
         </span>
-        {{restaurant.location}}
-        <a href="{{restaurant.google_map}}" class="text-secondary" target="_blank">
-          <i class="fas fa-location-arrow pr-2 fa-xs"></i>
-        </a>
+        <input type="text" class="form-control" id="location" name="location" form="form-edit"
+          value="{{restaurant.location}}">
       </p>
-
+      <br>
+      <p>
+        <span class="text-secondary">
+          <i class="fas fa-location-arrow pr-2 fa-xs"></i>
+          Google Map連結：
+        </span>
+        <input type="text" class="form-control" id="google_map" name="google_map" form="form-edit"
+          value="{{restaurant.google_map}}">
+      </p>
+      <br>
       <p class="mb-1">
         <span class="text-secondary">
           <i class="fas fa-mobile-alt pr-2"></i>
           電話：
         </span>
-        {{restaurant.phone}}
+        <input type="text" class="form-control" id="phone" name="phone" form="form-edit" value="{{restaurant.phone}}">
       </p>
-
+      <br>
       <p class="mb-5">
-        {{restaurant.description}}
+        <span class="text-secondary">
+          <i class="fas fa-info-circle pr-2"></i>
+          描述：
+        </span>
+        <textarea class="form-control" rows="4" id="description" name="description" form="form-edit"
+          value="{{restaurant.description}}" required>{{restaurant.description}}</textarea>
+      </p>
+      <p class="mb-1">
+        <span class="text-secondary">
+          <i class="fas fa-camera pr-2"></i>
+          餐廳照片URL位置：
+        </span>
+        <input type="text" class="form-control" id="image" name="image" form="form-edit" value="{{restaurant.image}}">
       </p>
 
       <img class="rounded mx-auto d-block mb-4 w-100" src="{{restaurant.image}}" alt="{{restaurant.name}}"
         style="max-width: 600px;">
+
+      <div class="text-center">
+        <form action="/restaurants/{{restaurant._id}}/edit" method="POST" id="form-edit" style="display: inline;">
+          <button type="submit" class="btn btn-light">Save Changes</button>
+        </form>
+        <a href="/restaurants/{{restaurant._id}}" class="btn btn-light">Cancel</a>
+        <form action="/restaurants/{{restaurant._id}}/delete" method="POST" style="display: inline;">
+          <button type="submit" class="btn btn-light">Delete</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>
