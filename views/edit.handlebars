@@ -5,7 +5,10 @@
     <div class="col-12 col-md-10 mx-auto">
 
       <div class="text-right">
-        <a href="/restaurants/{{restaurant._id}}/edit">Edit</a>
+        <a href="/restaurants/{{restaurant._id}}">Cancel</a>
+        <form action="/restaurants/{{restaurant._id}}/edit" method="POST" id="form-edit" style="display: inline;">
+          <button type="submit">Save</button>
+        </form>
         <form action="/restaurants/{{restaurant._id}}/delete" method="POST" style="display: inline;">
           <button type="submit">Delete</button>
         </form>
@@ -16,7 +19,7 @@
           <i class="fas fa-utensils pr-2"></i>
           類別：
         </span>
-        {{restaurant.category}}
+        <input type="text" id="category" name="category" form="form-edit" value="{{restaurant.category}}">
       </p>
 
       <p class="mb-1">

@@ -1,9 +1,10 @@
 const express = require('express')
 const app = express()
 const port = 3000
-const exphbr = require('express-handlebars')
+const exphbs = require('express-handlebars')
 const Restaurant = require('./models/restaurant')
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
 
 // Set connection to database
 mongoose.connect('mongodb://localhost/my-restaurants', { useNewUrlParser: true, useUnifiedTopology: true })
@@ -17,8 +18,10 @@ db.once('open', () => { // 連線成功
 })
 
 // Set template engine
-app.engine('handlebars', exphbr({ defaultLayout: 'main' }))
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
+
+app.use(bodyParser.urlencoded({ extended: true }))
 
 // Set router for index page (list of restaurants)
 app.get('/', (req, res) => {
@@ -50,6 +53,42 @@ app.get('/search', (req, res) => {
       })
     })
     .then(() => res.render('index', { restaurants: filteredList, keyword: keyword }))
+    .catch(error => console.log(error))
+})
+
+// Set router for edit page
+app.get('/restaurants/:restaurant_id/edit', (req, res) => {
+  console.log(req.params.restaurant_id)
+  const id = req.params.restaurant_id
+  return Restaurant.findById(id)
+    .lean()
+    .then(restaurant => res.render('edit', { restaurant }))
+    .catch(error => console.log(error))
+})
+
+// Set router for edit-save 
+app.post('/restaurants/:restaurant_id/edit', (req, res) => {
+  console.log(req.params.restaurant_id)
+  const id = req.params.restaurant_id
+  console.log(req.body)
+  const category = req.body.category
+  console.log(category)
+  return Restaurant.findById(id)
+    .then(restaurant => {
+      restaurant.category = category
+      return restaurant.save()
+    })
+    .then(restaurant => res.redirect(`/restaurants/${id}`))
+    .catch(error => console.log(error))
+})
+
+// Set router for delete function
+app.post('/restaurants/:restaurant_id/delete', (req, res) => {
+  console.log(req.params.restaurant_id)
+  const id = req.params.restaurant_id
+  return Restaurant.findById(id)
+    .then(restaurant => restaurant.remove())
+    .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
 
