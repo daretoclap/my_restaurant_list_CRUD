@@ -37,11 +37,11 @@
                 <i class="fas fa-star fa-xs"></i>
               </span>
 
-              <div>
-                <a href="/restaurants/{{this._id}}">Detail</a>
-                <a href="/restaurants/{{this._id}}/edit">Edit</a>
+              <div class="text-right mt-3">
+                <a href="/restaurants/{{this._id}}" class="btn btn-light btn-sm">Detail</a>
+                <a href="/restaurants/{{this._id}}/edit" class="btn btn-light btn-sm">Edit</a>
                 <form action="/restaurants/{{this._id}}/delete" method="POST" style="display: inline;">
-                  <button type="submit">Delete</button>
+                  <button type="submit" class="btn btn-light btn-sm">Delete</button>
                 </form>
               </div>
             </div>
