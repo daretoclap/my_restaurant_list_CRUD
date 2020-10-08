@@ -31,6 +31,28 @@ app.get('/', (req, res) => {
     .catch(error => console.error(error)) // 錯誤處理
 })
 
+// Set router for new page <<!!注意new的router需要放在detail page前面!!>>
+app.get('/restaurants/new', (req, res) => {
+  return res.render('new')
+})
+
+// Set router for create-new
+app.post('/restaurants/', (req, res) => {
+  const newRestaurant = req.body
+  console.log(req.body)
+  // return Restaurant.create({
+  //   name: newRestaurant.name,
+  //   category: newRestaurant.category,
+  //   image: newRestaurant.image,
+  //   location: newRestaurant.location,
+  //   phone: newRestaurant.phone,
+  //   google_map: newRestaurant.google_map,
+  //   description: newRestaurant.description,
+  // })
+  //   .then(() => res.redirect('/'))
+  //   .catch(error => console.log(error))
+})
+
 // Set router for viewing restaurant detail
 app.get('/restaurants/:restaurant_id', (req, res) => {
   console.log(req.params.restaurant_id)

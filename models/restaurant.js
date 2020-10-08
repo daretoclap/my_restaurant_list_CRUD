@@ -6,6 +6,11 @@ const typeString = {
   required: true // 這是個必填欄位
 }
 
+const typeStringNR = {
+  type: String, // 資料型別是字串
+  required: false // 非必填欄位
+}
+
 const typeNumber = {
   type: Number, // 資料型別是數字
   required: true // 這是個必填欄位
@@ -13,13 +18,13 @@ const typeNumber = {
 
 const restaurantSchema = new Schema({
   name: typeString,
-  name_en: typeString,
+  name_en: typeStringNR,
   category: typeString,
-  image: typeString,
+  image: typeStringNR,
   location: typeString,
   phone: typeString,
-  google_map: typeString,
-  rating: typeNumber,
+  google_map: typeStringNR,
+  rating: typeStringNR,
   description: typeString,
 })
 
