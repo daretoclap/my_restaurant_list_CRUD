@@ -48,6 +48,7 @@ app.post('/restaurants/', (req, res) => {
     phone: newRestaurant.phone,
     google_map: newRestaurant.google_map,
     description: newRestaurant.description,
+    rating: newRestaurant.rating
   })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))

@@ -3,29 +3,30 @@
   <div class="container">
     <div class="row">
       <div class="col-12 col-md-10 mx-auto">
+        <p class="text-secondary">*為必填欄位</p>
         <p class="mb-1">
           <span class="text-secondary">
             <i class="fas fa-store pr-2"></i>
-            餐廳名稱：
+            *餐廳名稱：
           </span>
-          <input type="text" class="form-control" id="name" name="name" form="form-edit">
+          <input type="text" class="form-control" id="name" name="name" form="form-edit" required>
         </p>
         <br>
         <p class="mb-1">
           <span class="text-secondary">
             <i class="fas fa-utensils pr-2"></i>
-            類別：
+            *類別：
           </span>
-          <input type="text" class="form-control" id="category" name="category" form="form-edit"
-            placeholder="美式、咖啡吧．．．">
+          <input type="text" class="form-control" id="category" name="category" form="form-edit" placeholder="美式、咖啡吧．．．"
+            required>
         </p>
         <br>
         <p class="mb-1">
           <span class="text-secondary">
             <i class="fas fa-map-marker-alt pr-2"></i>
-            地址：
+            *地址：
           </span>
-          <input type="text" class="form-control" id="location" name="location" form="form-edit">
+          <input type="text" class="form-control" id="location" name="location" form="form-edit" required>
         </p>
         <br>
         <p class="mb-1">
@@ -46,8 +47,16 @@
         <br>
         <p class="mb-1">
           <span class="text-secondary">
+            <i class="fas fa-star pr-2"></i>
+            評分：
+          </span>
+          <input type="text" class="form-control" id="rating" name="rating" form="form-edit">
+        </p>
+        <br>
+        <p class="mb-1">
+          <span class="text-secondary">
             <i class="fas fa-info-circle pr-2"></i>
-            描述：
+            *描述：
           </span>
           <textarea class="form-control" rows="4" id="description" name="description" form="form-edit"
             required></textarea>

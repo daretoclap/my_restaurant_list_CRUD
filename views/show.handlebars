@@ -7,7 +7,8 @@
       <div class="text-right">
         <a href="/restaurants/{{restaurant._id}}/edit" class="btn btn-light">Edit</a>
         <form action="/restaurants/{{restaurant._id}}/delete" method="POST" style="display: inline;">
-          <button type="submit" class="btn btn-light">Delete</button>
+          <button type="submit" class="btn btn-light"
+            onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
         </form>
       </div>
 
@@ -36,6 +37,14 @@
           電話：
         </span>
         {{restaurant.phone}}
+      </p>
+
+      <p class="mb-3">
+        <span class="text-secondary">
+          <i class="fas fa-star pr-2"></i>
+          評分：
+        </span>
+        {{restaurant.rating}}
       </p>
 
       <p class="mb-5">
