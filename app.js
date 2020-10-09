@@ -40,17 +40,17 @@ app.get('/restaurants/new', (req, res) => {
 app.post('/restaurants/', (req, res) => {
   const newRestaurant = req.body
   console.log(req.body)
-  // return Restaurant.create({
-  //   name: newRestaurant.name,
-  //   category: newRestaurant.category,
-  //   image: newRestaurant.image,
-  //   location: newRestaurant.location,
-  //   phone: newRestaurant.phone,
-  //   google_map: newRestaurant.google_map,
-  //   description: newRestaurant.description,
-  // })
-  //   .then(() => res.redirect('/'))
-  //   .catch(error => console.log(error))
+  return Restaurant.create({
+    name: newRestaurant.name,
+    category: newRestaurant.category,
+    image: newRestaurant.image,
+    location: newRestaurant.location,
+    phone: newRestaurant.phone,
+    google_map: newRestaurant.google_map,
+    description: newRestaurant.description,
+  })
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
 })
 
 // Set router for viewing restaurant detail
